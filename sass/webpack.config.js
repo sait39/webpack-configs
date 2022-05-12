@@ -1,9 +1,11 @@
 const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-module.exports = {
-	entry: './src/index.js',
-	output: {
-		path: path.resolve(__dirname, 'dist'),
-		filename: 'output.js'
-	}
+const { merge } = require('webpack-merge');
+
+const commonConfig = require('../webpack.common');
+
+module.exports = (env) => {
+	const config = require('./webpack.' + env);
+	return merge(commonConfig, config);
 }
